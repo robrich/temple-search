@@ -224,17 +224,18 @@ async function doSearch(e) {
     console.log(`can't search through zero temples`);
     return; // abort
   }
-  const currentTempleId = await getCurrentTempleId();
-  const templeDistance = getDistances({currentTempleId, templeList});
-  const templeShortList = templeDistance
-    .slice(0, TEMPLE_SEARCH_COUNT)
-    .filter(t => t.distance < TEMPLE_SEARCH_DISTANCE);
   const ordinanceType = document.querySelector('.adv-search-ordinance').value;
   const dateStr = document.querySelector('.adv-search-date').value;
   if (!ordinanceType || !dateStr) {
     alert('please select an ordinance and date');
     return;
   }
+  document.querySelector('.adv-search-results').innerHTML = '<table class="adv-search-grid"><tr><td>Loading ...</td></tr></table>';
+  const currentTempleId = await getCurrentTempleId();
+  const templeDistance = getDistances({currentTempleId, templeList});
+  const templeShortList = templeDistance
+    .slice(0, TEMPLE_SEARCH_COUNT)
+    .filter(t => t.distance < TEMPLE_SEARCH_DISTANCE);
   const datePieces = dateStr.split('-').map(p => parseInt(p, 10));
   const date = {
     day: datePieces[2],
@@ -245,9 +246,13 @@ async function doSearch(e) {
   const schedules = await getSchedules({templeList: templeShortList, ordinanceType, date});
   // This is the very definition of XSS
   const results = schedules.map(s => {
+    if (!s.sessionList) {
+      s.sessionList = [];
+    }
+    s.sessionList.forEach(ss => seatAvailableCount(ordinanceType, ss));
     const sessionTimes = s.sessionList.length === 0
       ? '<span class="adv-search-full">No appointments today</span>'
-      : s.sessionList.map(s => `<span class="${s.details.seatsAvailable > 0 ? 'adv-search-available' : 'adv-search-full'}">${formatTime(s.sessionTime)} (${s.details.seatsAvailable})</span>`).join(', ');
+      : s.sessionList.map(ss => `<span class="${ss.seatAvailCount > 0 ? 'adv-search-available' : 'adv-search-full'}">${formatTime(ss.sessionTime)} (${ordinanceType === 'PROXY_INITIATORY' ? `M: ${ss.seatAvailMale}, F: ${ss.seatAvailFemale}` : ss.seatAvailCount})</span>`).join(', ');
     return `<tr><td class="adv-search-no-wrap">${s.name}</td><td>${sessionTimes}</td></tr>`;
   });
   document.querySelector('.adv-search-results').innerHTML = '<table class="adv-search-grid">'+results.join('')+'</table>';
@@ -266,4 +271,45 @@ function formatTime(source) {
   const minute = pieces[1];
   let result = `${(hour > 12 ? hour - 12 : hour)}:${String(minute).padStart(2, '0')} ${hour>12 ? 'PM' : 'AM'}`;
   return result;
+}
+
+function seatAvailableCount(ordinanceType, session) {
+  //return session.results?.seatsAvailable ?? 0;
+
+  let maleHold = 0;
+  let femaleHold = 0;
+  switch (ordinanceType) {
+    case 'PROXY_BAPTISM':
+    case 'PROXY_SEALING':
+      maleHold = session.details?.malePatronCount ?? 0,
+      femaleHold = session.details.femalePatronCount ?? 0;
+      break;
+    case 'PROXY_ENDOWMENT':
+    case 'PROXY_INITIATORY':
+      femaleHold = session.additionalFemaleGuestCount ?? 0;
+      maleHold = session.additionalMaleGuestCount ?? 0;
+      break;
+  }
+
+  let available = 0;
+  switch (ordinanceType) {
+    case 'PROXY_INITIATORY':
+      // TODO: prompt for gender
+      available = session.details?.maleSeatsAvailable ?? 0
+        + session.details.femaleSeatsAvailable ?? 0;
+      session.seatAvailMale = session.details?.maleSeatsAvailable ?? 0;
+      session.seatAvailFemale = session.details?.femaleSeatsAvailable ?? 0;
+      break;
+    case 'PROXY_ENDOWMENT':
+      available = session.details?.remainingOnlineSeatsAvailable ?? 0;
+      break;
+    case 'PROXY_BAPTISM':
+    case 'PROXY_SEALING':
+      available = session.details?.seatsAvailable ?? 0;
+      break;
+  }
+  const hold = maleHold + femaleHold;
+  console.log(`${session.sessionTime}: avail: ${available}, hold: ${hold}`);
+
+  session.seatAvailCount = available - hold;
 }
