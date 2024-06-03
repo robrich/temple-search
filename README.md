@@ -16,7 +16,7 @@ Solution
 ### Install: one time
 
 1. Go to the Chrome Web Store and search for "Temple Search".
-2. Install the Temple Search Chrome Extension.
+2. Install the [Temple Search Chrome Extension](https://chromewebstore.google.com/detail/temple-search/pblahhcpdnegffcjjcnibcebpmcmkcba).
 
 ### Search
 
