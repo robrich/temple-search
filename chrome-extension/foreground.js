@@ -269,7 +269,7 @@ function formatTime(source) {
   }
   const hour = pieces[0];
   const minute = pieces[1];
-  let result = `${(hour > 12 ? hour - 12 : hour)}:${String(minute).padStart(2, '0')} ${hour>12 ? 'PM' : 'AM'}`;
+  let result = `${(hour > 12 ? hour - 12 : hour)}:${String(minute).padStart(2, '0')} ${hour >= 12 ? 'PM' : 'AM'}`;
   return result;
 }
 
