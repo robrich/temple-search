@@ -5,6 +5,8 @@ Temple Search
 
 This extension is **not** built by the Church of Jesus Christ of Latter-day Saints.
 
+Browser Store Pages: [Chrome](https://chromewebstore.google.com/detail/temple-search/pblahhcpdnegffcjjcnibcebpmcmkcba) | [Edge](https://microsoftedge.microsoft.com/addons/detail/temple-search/kelhdaiegjgggcgknoacphmgfgoaocfc)
+
 Problem
 -------
 
