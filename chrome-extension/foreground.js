@@ -1,6 +1,6 @@
 console.log('advanced temple search plugin running');
-waitUntilLoaded();
 
+const TEMPLE_DOMAIN = 'https://temple-online-scheduling.churchofjesuschrist.org';
 const TEMPLE_SEARCH_COUNT = 25;
 const TEMPLE_SEARCH_DISTANCE = 4.5; // 1 lat degree is 69 miles
 const ORDINANCE_TYPES = [
@@ -9,6 +9,8 @@ const ORDINANCE_TYPES = [
   'PROXY_ENDOWMENT',
   'PROXY_SEALING'
 ];
+
+waitUntilLoaded();
 
 async function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -26,7 +28,7 @@ async function waitUntilLoaded() {
 
 async function getTempleNames() {
   try {
-    const res = await fetch('https://tos.churchofjesuschrist.org/tisf/language/bundle/js/messages');
+    const res = await fetch(TEMPLE_DOMAIN+'/tisf/language/bundle/js/messages');
     const js = await res.text();
     const json = js.replace('tisfBundle = ', '').replace(/;$/, '');
     const tisfBundle = JSON.parse(json);
@@ -56,7 +58,7 @@ async function getTempleNames() {
 
 async function getTempleScheduling() {
   try {
-    const res = await fetch('https://tos.churchofjesuschrist.org/api/templeConfig/findAllOnlineSchedulingStatuses');
+    const res = await fetch(TEMPLE_DOMAIN+'/api/templeConfig/findAllOnlineSchedulingStatuses');
     const json = await res.json();
     if (!(json?.length)) {
       console.log(`can't find scheduling status`);
@@ -80,7 +82,7 @@ async function getTempleGeo() {
 
 async function getCurrentTempleId() {
   try {
-    const res = await fetch('https://tos.churchofjesuschrist.org/api/templeInfo');
+    const res = await fetch(TEMPLE_DOMAIN+'/api/templeInfo');
     const json = await res.json();
     if (!(json?.templeOrgId)) {
       console.log(`can't find currentTemple`);
@@ -144,7 +146,7 @@ async function getSchedule({temple, ordinanceType, date}) {
       sessionYear: date.year,
       templeOrgId: temple.id
     };
-    const res = await fetch('https://tos.churchofjesuschrist.org/api/templeSchedule/getSessionInfo', {
+    const res = await fetch(TEMPLE_DOMAIN+'/api/templeSchedule/getSessionInfo', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -242,7 +244,7 @@ async function doSearch(e) {
     month: datePieces[1]-1,
     year: datePieces[0]
   };
-  console.log('adv-searching...', ordinanceType, date, currentTempleId);
+  //console.log('adv-searching...', ordinanceType, date, currentTempleId);
   const schedules = await getSchedules({templeList: templeShortList, ordinanceType, date});
   // This is the very definition of XSS
   const results = schedules.map(s => {
@@ -256,7 +258,7 @@ async function doSearch(e) {
     return `<tr><td class="adv-search-no-wrap">${s.name}</td><td>${sessionTimes}</td></tr>`;
   });
   document.querySelector('.adv-search-results').innerHTML = '<table class="adv-search-grid">'+results.join('')+'</table>';
-  console.log('adv-search results', schedules);
+  //console.log('adv-search results', schedules);
 };
 
 function formatTime(source) {
@@ -309,7 +311,7 @@ function seatAvailableCount(ordinanceType, session) {
       break;
   }
   const hold = maleHold + femaleHold;
-  console.log(`${session.sessionTime}: avail: ${available}, hold: ${hold}`);
+  //console.log(`${session.sessionTime}: avail: ${available}, hold: ${hold}`);
 
   session.seatAvailCount = available - hold;
 }

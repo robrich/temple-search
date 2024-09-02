@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Temple Search",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Advanced Temple Search: Search across temples for proxy appointments at the Church of Jesus Christ of Latter-day Saints",
   "content_scripts": [{
     "css": ["foreground.css"],
@@ -10,12 +10,12 @@
       "foreground.js"
     ],
     "matches": [
-      "https://tos.churchofjesuschrist.org/*"
+      "https://temple-online-scheduling.churchofjesuschrist.org/*"
     ],
     "all_frames": true
   }],
   "host_permissions": [
-    "https://tos.churchofjesuschrist.org/*"
+    "https://temple-online-scheduling.churchofjesuschrist.org/*"
   ],
   "icons": {
     "16": "icon16.png",

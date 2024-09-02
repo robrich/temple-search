@@ -23,5 +23,6 @@ function zipDirectory(sourceDir, outPath) {
 
     stream.on('close', () => resolve());
     archive.finalize();
+    console.log('wrote '+outPath);
   });
 }
