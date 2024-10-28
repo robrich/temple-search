@@ -187,7 +187,9 @@ async function main() {
   window.templeList = templeList;
   console.log(`loaded ${templeList.length} temples`);
   initUI();
-  window.navigation.addEventListener('navigate', initUI);
+  if (window?.navigation?.addEventListener) {
+    window.navigation.addEventListener('navigate', initUI);
+  }
 }
 
 function initUI() {
