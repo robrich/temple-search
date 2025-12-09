@@ -7,12 +7,11 @@
     box-sizing: border-box;
     box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
     border-radius: 2px;
-    padding: 0 30px;
     margin-bottom: 10px;
+    padding: 10px;
   }
-  .form-control {
-    font-size: 1em;
-    height: 40px;
+  .eden-button {
+    margin-right: 1em;
   }
   .adv-search-submit {
     display: inline-block;
@@ -28,6 +27,11 @@
   .adv-search-grid {
     width: 100%;
     font-size: 0.8em;
+
+    td {
+      padding: 8px;
+      border-bottom: 1px solid #e0e2e2;
+    }
   }
   .adv-search-no-wrap {
     white-space: nowrap;

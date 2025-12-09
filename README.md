@@ -10,7 +10,7 @@ Browser Store Pages: [Chrome](https://chromewebstore.google.com/detail/temple-se
 Problem
 -------
 
-"I want to worship at the temple. Can I get an appointment?" Pull up the [Temple Scheduler app](https://temple-online-scheduling.churchofjesuschrist.org/) and choose your temple. Let's say Provo City Center temple. "Are there appointments here?" Click 4 or 7 buttons to pick your chosen proxy ordinance, group count, and eventually date. Nope, the calendar is full. Let's switch to the Orem temple. Another 4 to 7 clicks, and that temple is full that day too. How about Mt. Timpanogos? Yep, full too. Draper? Payson? Jordan River? A half hour later I'm exhausted, and I still haven't found a spot. "Can I just search across temples for available appointments?"
+"I want to worship at the temple. Can I get an appointment?" Pull up the [Temple Scheduler app](https://tosr.churchofjesuschrist.org/) and choose your temple. Let's say Provo City Center temple. "Are there appointments here?" Click 4 or 7 buttons to pick your chosen proxy ordinance, group count, and eventually date. Nope, the calendar is full. Let's switch to the Orem temple. Another 4 to 7 clicks, and that temple is full that day too. How about Mt. Timpanogos? Yep, full too. Draper? Payson? Jordan River? A half hour later I'm exhausted, and I still haven't found a spot. "Can I just search across temples for available appointments?"
 
 Solution
 --------
@@ -22,7 +22,7 @@ Solution
 
 ### Search
 
-1. Go to the [Temple Scheduler app](https://temple-online-scheduling.churchofjesuschrist.org/) and notice the new bar at the bottom.
+1. Go to the [Temple Scheduler app](https://tosr.churchofjesuschrist.org/) and notice the new bar at the bottom.
 2. Pick your proxy ordinance and date, and click "Search Across Temples".
 3. See the available appointments across all temples close to your chosen temple.
 
