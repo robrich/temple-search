@@ -23,12 +23,12 @@ Solution
 ### Search
 
 1. Go to the [Temple Scheduler app](https://tosr.churchofjesuschrist.org/) and notice the new bar at the bottom.
-2. Pick your proxy ordinance and date, and click "Search Across Temples".
+2. Pick your proxy ordinance, date, number of patrons, and click "Search Across Temples".
 3. See the available appointments across all temples close to your chosen temple.
+4. Click one of the times and it books it right there.
 
    ![Screenshot](screenshot.png)
 
-4. Now that you know where the appointments are, you can make your chosen appointment in the normal way.
 
 Privacy Policy
 --------------

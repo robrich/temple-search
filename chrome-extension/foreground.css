@@ -13,6 +13,14 @@
   .eden-button {
     margin-right: 1em;
   }
+  .adv-search-svg {
+    margin-right: 4px;
+  }
+  .adv-search-men, .adv-search-women {
+    width: 3.2em;
+    padding: 0;
+    text-align: right;
+  }
   .adv-search-submit {
     display: inline-block;
   }
