@@ -5,6 +5,10 @@ Temple Search
 
 This extension is **not** built by the Church of Jesus Christ of Latter-day Saints.
 
+<h2 style="color:red">I received a cease and desist from the Church temple department.  Sadly, this project is stalled.</h2>
+
+You can fork / download the code from here, then in Chrome's developer mode, you can "load unpacked extension."
+
 Browser Store Pages: [Chrome](https://chromewebstore.google.com/detail/temple-search/pblahhcpdnegffcjjcnibcebpmcmkcba) | [Edge](https://microsoftedge.microsoft.com/addons/detail/temple-search/kelhdaiegjgggcgknoacphmgfgoaocfc) | [Firefox](https://addons.mozilla.org/en-US/firefox/addon/temple-search/)
 
 Problem
